@@ -1,8 +1,17 @@
 #include <iostream>
 #include "Window.hpp"
 
+void ValidateArgc(int argc) {
+    if (argc != 3) {
+        std::cerr << "usage: ./race00 [width] [height]" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+}
+
 int main(int argc, char *argv[]) {
-    sf::Window window(sf::VideoMode(1280, 720), "My window");
+    //ValidateArgc(argc);
+
+    sf::Window window(sf::VideoMode(1920, 1080), "My window");
 
     while (window.isOpen())
     {
