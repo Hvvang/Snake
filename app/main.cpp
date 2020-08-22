@@ -1,5 +1,7 @@
 #include <iostream>
-#include "Window.hpp"
+#include <SFML/Window/Window.hpp>
+#include <SFML/Graphics.hpp>
+#include "src/Game.h"
 
 void ValidateArgc(int argc) {
     if (argc != 3) {
@@ -10,19 +12,15 @@ void ValidateArgc(int argc) {
 
 int main(int argc, char *argv[]) {
     //ValidateArgc(argc);
+    Game game;
 
-    sf::Window window(sf::VideoMode(1920, 1080), "My window");
+    game.SetPlayerOne(new Snake(game.GetRenderWindow(), 200, 200));
 
-    while (window.isOpen())
+    while (game.IsRunning())
     {
         // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+        game.update();
+        game.render();
     }
     return 0;
 }

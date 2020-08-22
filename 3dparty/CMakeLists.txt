@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.1)
 
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(SFML_INCLUDE_DIR "./SFML/include")
-set(SFML_LIBRARY_DIR "./SFML/build/lib")
+set(SFML_INCLUDE_DIR "./sfml/include")
+set(SFML_LIBRARY_DIR "./sfml/build/lib")
 
 link_directories(SFML_LIBRARY_DIR)
 include_directories(SFML_INCLUDE_DIR)
