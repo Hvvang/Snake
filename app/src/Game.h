@@ -6,7 +6,7 @@
 class Food;
 class Game {
  public:
-    Game();
+    Game(int width, int height);
     ~Game();
     void update();
     void render();
@@ -26,5 +26,5 @@ class Game {
     Food *food;
 
     void InitVariables();
-    void InitWindow();
+    void InitWindow(int width, int height);
 };

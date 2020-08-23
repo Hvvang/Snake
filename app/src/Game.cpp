@@ -1,8 +1,8 @@
 #include "Game.h"
 
-Game::Game() {
+Game::Game(int width, int height) {
     this->InitVariables();
-    this->InitWindow();
+    this->InitWindow(width, height);
 }
 
 Game::~Game() {
@@ -14,8 +14,8 @@ void Game::InitVariables() {
     this->endGame = false;
 }
 
-void Game::InitWindow() {
-    this->video_mode = sf::VideoMode(1920, 1080);
+void Game::InitWindow(int width, int height) {
+    this->video_mode = sf::VideoMode(width, height);
     this->window = new sf::RenderWindow(this->video_mode,
                                         "Race00",
                                         sf::Style::Close | sf::Style::Titlebar);
@@ -41,6 +41,8 @@ void Game::PoolEvents() {
                     player1->changeMoveDirection(sf::Vector2<int>(-1, 0));
                 } else if (this->windowEvent.key.code == sf::Keyboard::Right) {
                     player1->changeMoveDirection(sf::Vector2<int>(1, 0));
+                } else if (this->windowEvent.key.code == sf::Keyboard::Space) {
+                    player1->enlarger();
                 }
                 break;
         }
@@ -58,12 +60,14 @@ void Game::render() {
     player1->drawSnake();
     food->drawFood();
 
+
     if (CheckCollision(player1->getBody().front(), food->getFood())) {
         sf::Vector2f newLocation = food->getNewPosition(player1->getBody());
 
         food->changeLocation(newLocation);
     }
-    this->window->setFramerateLimit(60);
+    int gameSpeed = 60 - player1->getSnakeLength();
+    this->window->setFramerateLimit(gameSpeed <= 10 ? 10 : gameSpeed);
     this->window->display();
 }
 void Game::SetPlayerOne(Snake *snake) {

@@ -3,10 +3,13 @@
 #include <SFML/Window/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <list>
+#include <deque>
 
 #include "Random.h"
 #include "Food.h"
 #include "Utils.h"
+
+#define BOX_SIZE 40
 
 class Food;
 class Snake {
@@ -18,6 +21,8 @@ class Snake {
     void changeMoveDirection(sf::Vector2<int> direction);
     void moveSnake();
     std::vector<sf::RectangleShape>& getBody();
+    void enlarger();
+    int getSnakeLength();
 
  private:
     sf::RenderWindow *screen;
@@ -32,13 +37,9 @@ class Snake {
     /* Snake parameters */
     int snakeLength;
     sf::Vector2<int> currentMoveDirection;
-    std::list<sf::Vector2<int> > snakeMoveList;
-    sf::Vector2<int> lastDirection;
-    std::vector<sf::RectangleShape> body;
+    std::deque<sf::RectangleShape> body;
 
     /* Load from options */
     sf::Color colorBody;
     sf::Color colorHead;
-
-    void enlarger();
 };
