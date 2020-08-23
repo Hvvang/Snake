@@ -1,20 +1,18 @@
-cmake_minimum_required(VERSION 3.1)
+# The minimum version of CMake required
+cmake_minimum_required(VERSION 3.15)
+# The project name
+project(MyProject)
+# The C++ standard version. Can be 98 11 14 or 17
+set(CMAKE_CXX_STANDARD 17)
+set(SFML_INCLUDE_DIR "../SFML/include")
+set(SFML_LIBRARY_DIR "../SFML/build/lib")
 
-project(race00 LANGUAGES CXX)
-set(SOURCE_EXE main.cpp)
 add_subdirectory(src)
 
-include_directories(../3dparty/sfml/include/)
+link_directories(SFML_LIBRARY_DIR)
+include_directories(SFML_INCLUDE_DIR)
 
-add_compile_options(
-        -std=c++17
-        -Werror
-        -Wall
-        -Wextra
-        -Wpedantic
-        -Wno-unused-parameter
-)
+find_package(SFML 2.5.1 COMPONENTS system window graphics network audio)
 
-add_executable(race00 ${SOURCE_EXE})
-target_link_libraries(race00 sfml-graphics sfml-window sfml-system src)
-include_directories(race00 ${SFML_INCLUDE_DIR})
+add_executable(MyProject main.cpp)
+target_link_libraries (MyProject sfml-graphics sfml-window sfml-system src)

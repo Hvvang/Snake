@@ -56,12 +56,17 @@ void Game::render() {
 
     player1->moveSnake();
     player1->drawSnake();
-
+    food->drawFood();
+    
     this->window->setFramerateLimit(60);
     this->window->display();
 }
 void Game::SetPlayerOne(Snake *snake) {
     player1 = snake;
+}
+
+void Game::SetFood(Food *snakeFood) {
+    food = snakeFood;
 }
 
 sf::RenderWindow *Game::GetRenderWindow() const {

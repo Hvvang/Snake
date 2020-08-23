@@ -16,3 +16,8 @@ sf::RectangleShape Food::getFood() {
 void Food::drawFood() {
     screen->draw(food);
 }
+
+void Food::changeLocation(sf::Vector2f newLocation) {
+    location = newLocation;
+    screen->draw(food);
+}

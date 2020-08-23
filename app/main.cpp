@@ -13,9 +13,9 @@ void ValidateArgc(int argc) {
 int main(int argc, char *argv[]) {
     //ValidateArgc(argc);
     Game game;
-
+    Food *food = new Food(game.GetRenderWindow(), sf::Vector2f(10, 10));
     game.SetPlayerOne(new Snake(game.GetRenderWindow(), 200, 200));
-
+    game.SetFood(food);
     while (game.IsRunning())
     {
         // check all the window's events that were triggered since the last iteration of the loop
