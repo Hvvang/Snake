@@ -3,50 +3,51 @@
 Snake::Snake(sf::RenderWindow *w, int x, int y) {
     colorBody = sf::Color::Green;
     colorHead = sf::Color::Red;
-    movementSpeed = 5;
     screen = w;
+    currentMoveDirection = sf::Vector2<int>(0, -1);
 
-    snakeLength = 1;
-
+    snakeLength = 4;
     for (int i = 0; i < 4; ++i) {
-        if (i == 0) {
-            body.push_back(getRectangleAt(sf::Vector2f(x, y), colorHead));
-            snakeMoveList.push_front(sf::Vector2<int>(-1, 0));
-        }
+        if (i == 0)
+            body.push_front(getRectangleAt(sf::Vector2f(x, y), colorHead));
         else
-            enlarger();
+            body.push_back(getRectangleAt(body[i - 1].getPosition(), colorBody));
     }
 }
 
 void Snake::enlarger() {
-    sf::Vector2f new_location = body[snakeLength - 1].getPosition();
-    body.push_back(getRectangleAt(new_location, colorBody));
-    snakeMoveList.push_back(lastDirection);
     snakeLength++;
+    updateLegth = true;
 }
 
 void Snake::drawSnake() {
     for (int i = 1; i < snakeLength; ++i) {
-        screen->draw( body[i]);
+        screen->draw(body[i]);
     }
-    screen->draw( body[0] );
+    screen->draw(body[0]);
 }
 
 void Snake::moveSnake() {
-    snakeMoveList.push_front(currentMoveDirection);
-    lastDirection = snakeMoveList.back();
-    snakeMoveList.pop_back();
-
-    int index = 0;
-    for (auto i = snakeMoveList.begin();
-         i != snakeMoveList.end() && index < snakeLength; i++, index++) {
-        body[index].move(movementSpeed * (*i).x, movementSpeed * (*i).y);
-    }
+    sf::Vector2f newHead(body.front().getPosition().x
+                             + (BOX_SIZE * currentMoveDirection.x),
+                         body.front().getPosition().y
+                             + (BOX_SIZE * currentMoveDirection.y));
+    body.front().setFillColor(colorBody);
+    body.push_front(getRectangleAt(newHead, colorHead));
+    if (!updateLegth && (updateLegth = false))
+        body.pop_back();
 }
 
 void Snake::changeMoveDirection(sf::Vector2<int> direction) {
+    if ((currentMoveDirection.x == direction.x && currentMoveDirection.y != direction.y) ||
+        (currentMoveDirection.x != direction.x && currentMoveDirection.y == direction.y))
+        return;
     currentMoveDirection.x = direction.x;
     currentMoveDirection.y = direction.y;
+}
+
+int Snake::getSnakeLength() {
+    return snakeLength;
 }
 
 //void Snake::ateFood(Food *fd) {

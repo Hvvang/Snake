@@ -41,6 +41,8 @@ void Game::PoolEvents() {
                     player1->changeMoveDirection(sf::Vector2<int>(-1, 0));
                 } else if (this->windowEvent.key.code == sf::Keyboard::Right) {
                     player1->changeMoveDirection(sf::Vector2<int>(1, 0));
+                } else if (this->windowEvent.key.code == sf::Keyboard::Space) {
+                    player1->enlarger();
                 }
                 break;
         }
@@ -57,7 +59,9 @@ void Game::render() {
     player1->moveSnake();
     player1->drawSnake();
 
-    this->window->setFramerateLimit(60);
+
+    int gameSpeed = 60 - player1->getSnakeLength();
+    this->window->setFramerateLimit(gameSpeed <= 10 ? 10 : gameSpeed);
     this->window->display();
 }
 void Game::SetPlayerOne(Snake *snake) {
