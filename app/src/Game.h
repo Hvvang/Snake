@@ -6,7 +6,7 @@
 class Food;
 class Game {
  public:
-    Game(int width, int height);
+    Game(sf::RenderWindow *window, int width, int height);
     ~Game();
     void update();
     void render();
@@ -19,12 +19,13 @@ class Game {
 
     bool endGame;
  private:
-    sf::VideoMode video_mode;
-    sf::RenderWindow* window;
+    sf::RenderWindow *window;
     sf::Event windowEvent;
     Snake *player1;
     Food *food;
+    sf::Font m_font;
+    sf::Text m_scoreLabel;
+    int m_score;
 
-    void InitVariables();
-    void InitWindow(int width, int height);
+    void InitVariables(int width, int height);
 };

@@ -1,24 +1,25 @@
 #include "Game.h"
 
-Game::Game(int width, int height) {
-    this->InitVariables();
-    this->InitWindow(width, height);
+Game::Game(sf::RenderWindow *window, int width, int height) {
+    this->InitVariables(width, height);
+    this->window = window;
+    this->player1 = new Snake(this->GetRenderWindow(), width / 2, height / 2);
+    this->food = new Food(this->GetRenderWindow(), sf::Vector2f(10, 10));
 }
 
 Game::~Game() {
-    delete this->window;
     delete this->player1;
+    delete this->food;
 }
 
-void Game::InitVariables() {
+void Game::InitVariables(int width, int height) {
+    this->m_font.loadFromFile("ArialRegular.ttf");
     this->endGame = false;
-}
+    this->m_score = 0;
 
-void Game::InitWindow(int width, int height) {
-    this->video_mode = sf::VideoMode(width, height);
-    this->window = new sf::RenderWindow(this->video_mode,
-                                        "Race00",
-                                        sf::Style::Close | sf::Style::Titlebar);
+    this->m_scoreLabel.setFont(this->m_font);
+    this->m_scoreLabel.setString("Score: " + std::to_string(m_score));
+    this->m_scoreLabel.setPosition(sf::Vector2f(width - 200, 40));
 }
 
 bool Game::IsRunning() const {
@@ -55,6 +56,7 @@ void Game::update() {
 
 void Game::render() {
     this->window->clear();
+    this->window->draw(m_scoreLabel);
 
     player1->moveSnake();
     player1->drawSnake();
@@ -62,6 +64,8 @@ void Game::render() {
 
     if (CheckCollision(player1->getBody().front(), food->getFood())) {
         sf::Vector2f newLocation = food->getNewPosition(player1->getBody());
+        m_score++;
+        m_scoreLabel.setString("Score: " + std::to_string(m_score));
         food->changeLocation(newLocation);
     }
     int gameSpeed = 60 - player1->getSnakeLength();

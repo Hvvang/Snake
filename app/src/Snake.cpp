@@ -29,12 +29,12 @@ void Snake::drawSnake() {
 
 void Snake::moveSnake() {
     sf::Vector2f newHead(body.front().getPosition().x
-                             + (BOX_SIZE * currentMoveDirection.x),
+                             + BOX_SIZE * currentMoveDirection.x,
                          body.front().getPosition().y
-                             + (BOX_SIZE * currentMoveDirection.y));
+                             + BOX_SIZE * currentMoveDirection.y);
     body.front().setFillColor(colorBody);
     body.insert(body.begin(), getRectangleAt(newHead, colorHead));
-    if (!updateLegth && (updateLegth = false))
+    if (!updateLegth && !(updateLegth = false))
         body.pop_back();
 }
 
