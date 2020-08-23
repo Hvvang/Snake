@@ -20,9 +20,10 @@ class Snake {
     void ateFood(Food *fd);
     void changeMoveDirection(sf::Vector2<int> direction);
     void moveSnake();
-    std::vector<sf::RectangleShape>& getBody();
+    std::deque<sf::RectangleShape>& getBody();
     void enlarger();
     int getSnakeLength();
+    bool checkDeathCollision();
 
  private:
     sf::RenderWindow *screen;

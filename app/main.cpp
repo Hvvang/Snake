@@ -16,8 +16,9 @@ int main(int argc, char *argv[]) {
     int height = std::stoi(argv[2]);
     Game game(width, height);
 
+    Food *food = new Food(game.GetRenderWindow(), sf::Vector2f(0, 0));
     game.SetPlayerOne(new Snake(game.GetRenderWindow(), width / 2, height / 2));
-
+    game.SetFood(food);
     while (game.IsRunning())
     {
         // check all the window's events that were triggered since the last iteration of the loop
