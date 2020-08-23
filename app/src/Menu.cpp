@@ -37,6 +37,7 @@ Menu::Menu(sf::RenderWindow *window,
         menu[4].setPosition(sf::Vector2f(width / 2 - width / 20, height / (MAX_NUMBER_OF_ITEMS + 1) * 5));
 
         selectedItemIndex = 2;
+        menu[selectedItemIndex].setColor(sf::Color::Red);
     }
 
 Menu::~Menu() {
