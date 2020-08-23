@@ -98,7 +98,7 @@ void Menu::MenuLoop(sf::RenderWindow *window) {
                     break;
                 case sf::Event::TextEntered:
                     if (event.text.unicode < 128) {
-                        if (event.text.unicode != '\n') {
+                        if (event.text.unicode != '\n' && event.text.unicode != ' ') {
                             m_username += event.text.unicode;
                             if (event.text.unicode == '\b'
                                 && m_username.getSize() >= 2)
