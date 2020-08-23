@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 3.15)
 project(MyProject)
 # The C++ standard version. Can be 98 11 14 or 17
 set(CMAKE_CXX_STANDARD 17)
-set(SFML_INCLUDE_DIR "../SFML/include")
-set(SFML_LIBRARY_DIR "../SFML/build/lib")
+set(SFML_INCLUDE_DIR "../3dparty/SFML/include")
+set(SFML_LIBRARY_DIR "../3dparty/SFML/build/lib")
 
 add_subdirectory(src)
 

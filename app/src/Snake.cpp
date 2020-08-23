@@ -49,6 +49,10 @@ void Snake::changeMoveDirection(sf::Vector2<int> direction) {
     currentMoveDirection.y = direction.y;
 }
 
+std::vector<sf::RectangleShape>& Snake::getBody() {
+    return body;
+}
+
 //void Snake::ateFood(Food *fd) {
 //    if (checkCollision(body[0], fd->getFood())) {
 //        delete fd;
