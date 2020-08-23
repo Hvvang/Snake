@@ -4,7 +4,7 @@ Game::Game(sf::RenderWindow *window, int width, int height) {
     this->InitVariables(width, height);
     this->window = window;
     this->player1 = new Snake(this->GetRenderWindow(), width / 2, height / 2);
-    this->food = new Food(this->GetRenderWindow(), sf::Vector2f(10, 10));
+    this->food = new Food(this->GetRenderWindow(), sf::Vector2f(120, 120));
 }
 
 Game::~Game() {
@@ -62,18 +62,24 @@ void Game::render() {
     player1->drawSnake();
     food->drawFood();
 
+    sf::Time elapsed1 = m_clock.getElapsedTime();
+    if (elapsed1.asSeconds() >= 4) {
+        player1->enshorter();
+        m_clock.restart();
+    }
     if (CheckCollision(player1->getBody().front(), food->getFood())) {
         sf::Vector2f newLocation = food->getNewPosition(player1->getBody());
         m_score++;
         m_scoreLabel.setString("Score: " + std::to_string(m_score));
         food->changeLocation(newLocation);
         player1->enlarger();
+        m_clock.restart();
     }
-    if (player1->checkDeathCollision()) {
-        std::cout << "collision" << '\n';
+    if (player1->checkDeathCollision() || player1->getSnakeLength() < 2) {
+        endGame = true;
     }
     int gameSpeed = 60 - player1->getSnakeLength();
-    this->window->setFramerateLimit(gameSpeed <= 10 ? 10 : gameSpeed)   ;
+    this->window->setFramerateLimit(gameSpeed <= 10 ? 10 : 10)   ;
     this->window->display();
 }
 void Game::SetPlayerOne(Snake *snake) {

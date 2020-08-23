@@ -23,6 +23,7 @@ class Game {
     sf::Event windowEvent;
     Snake *player1;
     Food *food;
+    sf::Clock m_clock;
     sf::Font m_font;
     sf::Text m_scoreLabel;
     int m_score;

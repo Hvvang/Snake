@@ -14,7 +14,7 @@ sf::RectangleShape getRectangleAt( sf::Vector2f location, sf::Color color )
 bool CheckCollision(const sf::RectangleShape& a, const sf::RectangleShape& b) {
     sf::Rect<float> c(a.getGlobalBounds().left, a.getGlobalBounds().top, a.getGlobalBounds().width - 1, a.getGlobalBounds().height - 1);
     sf::Rect<float> d(b.getGlobalBounds().left, b.getGlobalBounds().top, b.getGlobalBounds().width - 1, b.getGlobalBounds().height - 1);
-    std::cout << d.height << std::endl;
+    // std::cout << d.height << std::endl;
     return c.intersects(d);
 }
 
