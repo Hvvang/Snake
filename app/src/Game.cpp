@@ -1,8 +1,8 @@
 #include "Game.h"
 
-Game::Game() {
+Game::Game(int width, int height) {
     this->InitVariables();
-    this->InitWindow();
+    this->InitWindow(width, height);
 }
 
 Game::~Game() {
@@ -14,8 +14,8 @@ void Game::InitVariables() {
     this->endGame = false;
 }
 
-void Game::InitWindow() {
-    this->video_mode = sf::VideoMode(1920, 1080);
+void Game::InitWindow(int width, int height) {
+    this->video_mode = sf::VideoMode(width, height);
     this->window = new sf::RenderWindow(this->video_mode,
                                         "Race00",
                                         sf::Style::Close | sf::Style::Titlebar);
