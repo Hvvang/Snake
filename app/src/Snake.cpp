@@ -46,6 +46,10 @@ void Snake::changeMoveDirection(sf::Vector2<int> direction) {
     currentMoveDirection.y = direction.y;
 }
 
+
+std::vector<sf::RectangleShape>& Snake::getBody() {
+    return body;
+
 int Snake::getSnakeLength() {
     return snakeLength;
 }
