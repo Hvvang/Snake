@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 
 project(race00 LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
 set(SOURCE_EXE main.cpp)
 add_subdirectory(src)
 
@@ -9,10 +10,10 @@ configure_file(resources/ArialRegular.ttf ${CMAKE_CURRENT_BINARY_DIR}/ArialRegul
 
 add_compile_options(
         -std=c++17
-        -Werror
-        -Wall
-        -Wextra
-        -Wpedantic
+#        -Werror
+#        -Wall
+#        -Wextra
+#        -Wpedantic
         -Wno-unused-parameter
 )
 
