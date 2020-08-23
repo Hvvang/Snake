@@ -56,12 +56,22 @@ void Game::render() {
 
     player1->moveSnake();
     player1->drawSnake();
+    food->drawFood();
 
+    if (CheckCollision(player1->getBody().front(), food->getFood())) {
+        sf::Vector2f newLocation = food->getNewPosition(player1->getBody());
+
+        food->changeLocation(newLocation);
+    }
     this->window->setFramerateLimit(60);
     this->window->display();
 }
 void Game::SetPlayerOne(Snake *snake) {
     player1 = snake;
+}
+
+void Game::SetFood(Food *snakeFood) {
+    food = snakeFood;
 }
 
 sf::RenderWindow *Game::GetRenderWindow() const {
