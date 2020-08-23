@@ -118,6 +118,7 @@ void Menu::StartGame() {
     Game game(m_window, m_width, m_height);
     while (game.IsRunning()) {
         // check all the window's events that were triggered since the last iteration of the loop
+
         if (!game.endGame) {
             game.update();
             game.render();
