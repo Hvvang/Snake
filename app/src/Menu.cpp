@@ -118,8 +118,13 @@ void Menu::StartGame() {
     Game game(m_window, m_width, m_height);
     while (game.IsRunning()) {
         // check all the window's events that were triggered since the last iteration of the loop
-        game.update();
-        game.render();
+
+        if (!game.endGame) {
+            game.update();
+            game.render();
+        } else {
+            game.GetRenderWindow()->close();
+        }
     }
 }
 void Menu::OpenLeaderBoard(sf::RenderWindow *window, int width, int height) {

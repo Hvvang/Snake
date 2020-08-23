@@ -3,11 +3,12 @@
 #include <SFML/Window/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <list>
-#include <deque>
+#include <vector>
 
 #include "Random.h"
 #include "Food.h"
 #include "Utils.h"
+#include <iostream>
 
 #define BOX_SIZE 40
 
@@ -15,13 +16,17 @@ class Food;
 class Snake {
  public:
     Snake(sf::RenderWindow *w, int x, int y);
+    ~Snake() {
+        std::cout << "Snake destructed\n";
+    }
     void drawSnake();
     void died();
     void ateFood(Food *fd);
     void changeMoveDirection(sf::Vector2<int> direction);
     void moveSnake();
-    std::deque<sf::RectangleShape>& getBody();
+    std::vector<sf::RectangleShape>& getBody();
     void enlarger();
+    void enshorter();
     int getSnakeLength();
     bool checkDeathCollision();
 

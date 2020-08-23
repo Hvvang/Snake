@@ -9,13 +9,13 @@ class Food {
  public:
     Food(sf::RenderWindow *w, sf::Vector2f loc);
     ~Food() {
-        std::cout << "Food\n";
+        std::cout << "Food destructed\n";
     }
 
     sf::RectangleShape getFood();
     void drawFood();
     void changeLocation(sf::Vector2f newLocation);
-    sf::Vector2f getNewPosition(std::deque<sf::RectangleShape>& snakeBody);
+    sf::Vector2f getNewPosition(std::vector<sf::RectangleShape>& snakeBody);
  private:
     Random rand;
     sf::Color color;
