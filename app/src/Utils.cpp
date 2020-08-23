@@ -1,7 +1,6 @@
 #include "Utils.h"
 
-sf::RectangleShape getRectangleAt( sf::Vector2f location, sf::Color color )
-{
+sf::RectangleShape getRectangleAt( sf::Vector2f location, sf::Color color) {
     sf::RectangleShape box;
     box.setSize(sf::Vector2f(BOX_SIZE, BOX_SIZE));
     box.setPosition(location);

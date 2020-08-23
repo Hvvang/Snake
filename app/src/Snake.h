@@ -21,8 +21,6 @@ class Snake {
         std::cout << "Snake destructed\n";
     }
     void drawSnake();
-    void died();
-    void ateFood(Food *fd);
     void changeMoveDirection(sf::Vector2<int> direction);
     void moveSnake();
     std::vector<sf::RectangleShape> & getBody();

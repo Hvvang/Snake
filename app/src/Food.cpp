@@ -1,8 +1,7 @@
 #include "Food.h"
 #include "Utils.h"
 
-Food::Food(sf::RenderWindow *w, sf::Vector2f loc) {
-    location = loc;
+Food::Food(sf::RenderWindow *w) {
     screen = w;
     color = sf::Color::Red;
 }
@@ -37,7 +36,6 @@ void Food::drawFood() {
     screen->draw(food);
 }
 
-void Food::changeLocation(sf::Vector2f newLocation) {
-    location = newLocation;
-    Food::drawFood();
+void Food::changeLocation(std::vector<sf::RectangleShape> &snakeBody) {
+    location = Food::getNewPosition(snakeBody);
 }

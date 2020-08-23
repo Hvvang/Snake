@@ -18,9 +18,8 @@ Snake::Snake(sf::RenderWindow *w, int x, int y) {
 bool Snake::checkDeathCollision() {
     const auto snakeBody = Snake::getBody();
     sf::Vector2f snakePosition = snakeBody.front().getPosition();
-    if (snakePosition.x > screen->getSize().x || snakePosition.x < 0 ||
-        snakePosition.y > screen->getSize().y || snakePosition.y < 0) {
-            std::cout << "\t\tborder" << '\n';
+    if (snakePosition.x + BOX_SIZE > screen->getSize().x || snakePosition.x < 0 ||
+        snakePosition.y + BOX_SIZE > screen->getSize().y || snakePosition.y < 0) {
         return true;
     }
 
@@ -82,12 +81,3 @@ std::vector<sf::RectangleShape> & Snake::getBody() {
 int Snake::getSnakeLength() {
     return snakeLength;
 }
-
-//void Snake::ateFood(Food *fd) {
-//    if (checkCollision(body[0], fd->getFood())) {
-//        delete fd;
-//        enlarger();
-//        return true;
-//    }
-//    return false;
-//}
