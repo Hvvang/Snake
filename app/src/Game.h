@@ -2,6 +2,7 @@
 
 #include "Snake.h"
 #include "Food.h"
+#include <SFML/Audio.hpp>
 
 class Food;
 class Game {
@@ -25,6 +26,9 @@ class Game {
     Snake *player1;
     Food *food;
     sf::Clock m_clock;
+    sf::SoundBuffer m_soundBuffer;
+    sf::Sound m_sound;
+
     sf::Font m_font;
     sf::Text m_scoreLabel;
     int m_score;

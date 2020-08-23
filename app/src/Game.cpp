@@ -6,6 +6,10 @@ Game::Game(sf::RenderWindow *window, int width, int height) {
     this->player1 = new Snake(this->GetRenderWindow(), width / 2, height / 2);
     this->food = new Food(this->GetRenderWindow());
     this->food->changeLocation(this->player1->getBody());
+
+    this->m_soundBuffer.loadFromFile("/Users/huanghe/Desktop/race00-C-SNAKE-/app/resources/back.wav");
+    this->m_sound.setBuffer(this->m_soundBuffer);
+    this->m_sound.play();
 }
 
 Game::~Game() {
@@ -61,15 +65,14 @@ void Game::render() {
 
     player1->moveSnake();
     player1->drawSnake();
+    food->drawFood();
     sf::Time elapsed1 = m_clock.getElapsedTime();
     if (elapsed1.asSeconds() >= 4) {
         player1->enshorter();
         m_clock.restart();
     }
     if (CheckCollision(player1->getBody().front(), food->getFood())) {
-        // sf::Vector2f newLocation = food->getNewPosition(player1->getBody());
         m_scoreLabel.setString("Score: " + std::to_string(++m_score));
-        // food->changeLocation(newLocation)
         this->food->changeLocation(this->player1->getBody());
         player1->enlarger();
         m_clock.restart();
