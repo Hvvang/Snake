@@ -15,7 +15,7 @@ class Food {
     sf::RectangleShape getFood();
     void drawFood();
     void changeLocation(sf::Vector2f newLocation);
-    sf::Vector2f getNewPosition(std::vector<sf::RectangleShape>& snakeBody);
+    sf::Vector2f getNewPosition(std::deque<sf::RectangleShape>& snakeBody);
  private:
     Random rand;
     sf::Color color;

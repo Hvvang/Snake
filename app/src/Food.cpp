@@ -11,13 +11,13 @@ sf::RectangleShape Food::getFood() {
     return food;
 }
 
-sf::Vector2f Food::getNewPosition(std::vector<sf::RectangleShape>& snakeBody) {
+sf::Vector2f Food::getNewPosition(std::deque<sf::RectangleShape>& snakeBody) {
     bool collision = true;
     sf::Vector2f newLocation;
 
     while (collision) {
-        int x = rand.getRandomInt(0, screen->getSize().x);
-        int y = rand.getRandomInt(0, screen->getSize().y);
+        int x = rand.getRandomInt(BOX_SIZE, screen->getSize().x - BOX_SIZE);
+        int y = rand.getRandomInt(BOX_SIZE, screen->getSize().y - BOX_SIZE);
 
         newLocation.x = x;
         newLocation.y = y;

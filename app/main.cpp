@@ -20,7 +20,6 @@ int main(int argc, char *argv[]) {
                                                     "Race00",
                                                     sf::Style::Close | sf::Style::Titlebar);
     Menu menu(window, width, height);
-
     menu.MenuLoop(window);
     return 0;
 }

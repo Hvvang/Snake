@@ -67,6 +67,10 @@ void Game::render() {
         m_score++;
         m_scoreLabel.setString("Score: " + std::to_string(m_score));
         food->changeLocation(newLocation);
+        player1->enlarger();
+    }
+    if (player1->checkDeathCollision()) {
+        std::cout << "collision" << '\n';
     }
     int gameSpeed = 60 - player1->getSnakeLength();
     this->window->setFramerateLimit(gameSpeed <= 10 ? 10 : gameSpeed)   ;

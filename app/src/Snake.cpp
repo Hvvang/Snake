@@ -15,6 +15,31 @@ Snake::Snake(sf::RenderWindow *w, int x, int y) {
     }
 }
 
+bool Snake::checkDeathCollision() {
+    const auto snakeBody = Snake::getBody();
+    sf::Vector2f snakePosition = snakeBody.front().getPosition();
+    if (snakePosition.x > screen->getSize().x || snakePosition.x < 0 ||
+        snakePosition.y > screen->getSize().y || snakePosition.y < 0) {
+            std::cout << "\t\tborder" << '\n';
+        return true;
+    }
+
+    const auto nextX = snakePosition.x + BOX_SIZE / 2 + (BOX_SIZE * currentMoveDirection.x);
+    const auto nextY = snakePosition.y + BOX_SIZE / 2 - (BOX_SIZE * currentMoveDirection.y);
+
+    // std::cout << "\t[ " << nextX << "; " << nextY << " ]" << '\n';
+    for (int i = 3; i < snakeLength; ++i) {
+        auto x = (body[i].getPosition().x + BOX_SIZE / 2);
+        auto y = (body[i].getPosition().y + BOX_SIZE / 2);
+
+        // std::cout << "[ " << x << "; " << y << " ]" << '\n';
+        if (x == nextX && y == nextY) {
+            return true;
+        }
+	}
+    return false;
+}
+
 void Snake::enlarger() {
     snakeLength++;
     updateLegth = true;
@@ -47,7 +72,7 @@ void Snake::changeMoveDirection(sf::Vector2<int> direction) {
 }
 
 
-std::vector<sf::RectangleShape>& Snake::getBody() {
+std::deque<sf::RectangleShape>& Snake::getBody() {
     return body;
 }
 
