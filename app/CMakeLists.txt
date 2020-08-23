@@ -5,6 +5,7 @@ set(SOURCE_EXE main.cpp)
 add_subdirectory(src)
 
 include_directories(../3dparty/sfml/include/)
+configure_file(resources/ArialRegular.ttf ${CMAKE_CURRENT_BINARY_DIR}/ArialRegular.ttf COPYONLY)
 
 add_compile_options(
         -std=c++17
