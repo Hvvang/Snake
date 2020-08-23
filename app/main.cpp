@@ -2,6 +2,7 @@
 #include <SFML/Window/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "src/Game.h"
+#include "src/Menu.h"
 
 void ValidateArgc(int argc) {
     if (argc != 3) {
@@ -14,17 +15,12 @@ int main(int argc, char *argv[]) {
     ValidateArgc(argc);
     int width = std::stoi(argv[1]);
     int height = std::stoi(argv[2]);
-    Game game(width, height);
-    Food *food = new Food(game.GetRenderWindow(), sf::Vector2f(10, 10));
+    sf::VideoMode mode = sf::VideoMode(width, height);
+    sf::RenderWindow *window = new sf::RenderWindow(mode,
+                                                    "Race00",
+                                                    sf::Style::Close | sf::Style::Titlebar);
+    Menu menu(window, width, height);
 
-    game.SetFood(food);
-    game.SetPlayerOne(new Snake(game.GetRenderWindow(), width / 2, height / 2));
-
-    while (game.IsRunning())
-    {
-        // check all the window's events that were triggered since the last iteration of the loop
-        game.update();
-        game.render();
-    }
+    menu.MenuLoop(window);
     return 0;
 }
