@@ -4,7 +4,7 @@
 
 class Game {
  public:
-    Game();
+    Game(int width, int height);
     ~Game();
     void update();
     void render();
@@ -22,5 +22,5 @@ class Game {
     Snake *player1;
 
     void InitVariables();
-    void InitWindow();
+    void InitWindow(int width, int height);
 };

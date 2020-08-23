@@ -11,10 +11,12 @@ void ValidateArgc(int argc) {
 }
 
 int main(int argc, char *argv[]) {
-    //ValidateArgc(argc);
-    Game game;
+    ValidateArgc(argc);
+    int width = std::stoi(argv[1]);
+    int height = std::stoi(argv[2]);
+    Game game(width, height);
 
-    game.SetPlayerOne(new Snake(game.GetRenderWindow(), 200, 200));
+    game.SetPlayerOne(new Snake(game.GetRenderWindow(), width / 2, height / 2));
 
     while (game.IsRunning())
     {
