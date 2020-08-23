@@ -27,7 +27,7 @@ bool Game::IsRunning() const {
 }
 
 void Game::PoolEvents() {
-    while (this->window->pollEvent(this->windowEvent)) {
+    while (this->window->pollEvent(this->windowEvent) && !endGame) {
         switch (this->windowEvent.type) {
             case sf::Event::Closed:this->window->close();
                 break;
@@ -73,13 +73,13 @@ void Game::render() {
         m_scoreLabel.setString("Score: " + std::to_string(m_score));
         food->changeLocation(newLocation);
         player1->enlarger();
-        m_clock.restart();
     }
-    if (player1->checkDeathCollision() || player1->getSnakeLength() < 2) {
-        endGame = true;
+    if (player1->checkDeathCollision()) {
+        this->endGame = true;
+        std::cout << "collision" << '\n';
     }
-    int gameSpeed = 60 - player1->getSnakeLength();
-    this->window->setFramerateLimit(gameSpeed <= 10 ? 10 : 10)   ;
+    int gameSpeed = 20 - player1->getSnakeLength();
+    this->window->setFramerateLimit(gameSpeed <= 10 ? 10 : gameSpeed)   ;
     this->window->display();
 }
 void Game::SetPlayerOne(Snake *snake) {
@@ -92,4 +92,7 @@ void Game::SetFood(Food *snakeFood) {
 
 sf::RenderWindow *Game::GetRenderWindow() const {
     return this->window;
+}
+int Game::GetScore() {
+    return m_score;
 }

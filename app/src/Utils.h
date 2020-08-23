@@ -7,3 +7,4 @@
 
 sf::RectangleShape getRectangleAt(sf::Vector2f location, sf::Color color );
 bool CheckCollision(const sf::RectangleShape& a, const sf::RectangleShape& b);
+void SaveResultToFile(std::string username, int score);

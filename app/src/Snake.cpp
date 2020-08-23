@@ -6,12 +6,12 @@ Snake::Snake(sf::RenderWindow *w, int x, int y) {
     screen = w;
     currentMoveDirection = sf::Vector2<int>(0, -1);
 
-    snakeLength = 2;
-    for (int i = 0; i < 2; ++i) {
+    snakeLength = 4;
+    for (int i = 0; i < 4; ++i) {
         if (i == 0)
             body.insert(body.begin(), getRectangleAt(sf::Vector2f(x, y), colorHead));
         else
-            body.push_back(getRectangleAt(body[i - 1].getPosition(), colorBody));
+            body.push_back(getRectangleAt(sf::Vector2f(10000, 10000), colorBody));
     }
 }
 
@@ -20,6 +20,7 @@ bool Snake::checkDeathCollision() {
     sf::Vector2f snakePosition = snakeBody.front().getPosition();
     if (snakePosition.x > screen->getSize().x || snakePosition.x < 0 ||
         snakePosition.y > screen->getSize().y || snakePosition.y < 0) {
+            std::cout << "\t\tborder" << '\n';
         return true;
     }
 
@@ -74,10 +75,19 @@ void Snake::changeMoveDirection(sf::Vector2<int> direction) {
 }
 
 
-std::vector<sf::RectangleShape>& Snake::getBody() {
+std::vector<sf::RectangleShape> & Snake::getBody() {
     return body;
 }
 
 int Snake::getSnakeLength() {
     return snakeLength;
 }
+
+//void Snake::ateFood(Food *fd) {
+//    if (checkCollision(body[0], fd->getFood())) {
+//        delete fd;
+//        enlarger();
+//        return true;
+//    }
+//    return false;
+//}

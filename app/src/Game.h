@@ -15,6 +15,7 @@ class Game {
     void PoolEvents();
     void SetPlayerOne(Snake *snake);
     void SetFood(Food *food);
+    int GetScore();
     sf::RenderWindow *GetRenderWindow() const;
 
     bool endGame;

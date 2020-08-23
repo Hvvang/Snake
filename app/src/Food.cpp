@@ -11,7 +11,7 @@ sf::RectangleShape Food::getFood() {
     return food;
 }
 
-sf::Vector2f Food::getNewPosition(std::vector<sf::RectangleShape>& snakeBody) {
+sf::Vector2f Food::getNewPosition(std::vector<sf::RectangleShape> &snakeBody) {
     bool collision = true;
     sf::Vector2f newLocation;
 

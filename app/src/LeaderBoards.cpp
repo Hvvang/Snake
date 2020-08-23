@@ -35,6 +35,8 @@ LeaderBoard::LeaderBoard(sf::RenderWindow *window, int width, int height)
     menu[1].setString("Press Escape to return!");
     menu[1].setPosition(sf::Vector2f(m_width - m_width + 100, m_height - m_height + 100));
     for (const auto &leader : leaders) {
+        if (index >= 12)
+            break;
         menu[index].setCharacterSize(height / 20);
         menu[index].setFont(font);
         menu[index].setString(std::to_string(index - 1) + ". " + leader.second + ": " + std::to_string(leader.first));

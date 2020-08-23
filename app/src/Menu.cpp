@@ -1,6 +1,7 @@
 #include "Menu.h"
 #include "Game.h"
 #include "LeaderBoards.h"
+#include "Utils.h"
 
 Menu::Menu(sf::RenderWindow *window,
            float width,
@@ -97,10 +98,13 @@ void Menu::MenuLoop(sf::RenderWindow *window) {
                     break;
                 case sf::Event::TextEntered:
                     if (event.text.unicode < 128) {
-                        m_username += event.text.unicode;
-                        if (event.text.unicode == '\b')
-                            m_username.erase(m_username.getSize() - 2, 2);
-                        menu[1].setString("Your name: " + m_username);
+                        if (event.text.unicode != '\n') {
+                            m_username += event.text.unicode;
+                            if (event.text.unicode == '\b'
+                                && m_username.getSize() >= 2)
+                                m_username.erase(m_username.getSize() - 2, 2);
+                            menu[1].setString("Your name: " + m_username);
+                        }
                     }
                     break;
                 case sf::Event::Closed:window->close();
@@ -117,15 +121,14 @@ void Menu::MenuLoop(sf::RenderWindow *window) {
 void Menu::StartGame() {
     Game game(m_window, m_width, m_height);
     while (game.IsRunning()) {
-        // check all the window's events that were triggered since the last iteration of the loop
-
         if (!game.endGame) {
             game.update();
             game.render();
         } else {
-            game.GetRenderWindow()->close();
+            break;
         }
     }
+    SaveResultToFile(m_username, game.GetScore());
 }
 void Menu::OpenLeaderBoard(sf::RenderWindow *window, int width, int height) {
     LeaderBoard lb(window, width, height);
