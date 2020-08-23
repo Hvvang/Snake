@@ -37,7 +37,7 @@ class Snake {
     /* Snake parameters */
     int snakeLength;
     sf::Vector2<int> currentMoveDirection;
-    std::deque<sf::RectangleShape> body;
+    std::vector<sf::RectangleShape> body;
 
     /* Load from options */
     sf::Color colorBody;

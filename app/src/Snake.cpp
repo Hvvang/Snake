@@ -9,7 +9,7 @@ Snake::Snake(sf::RenderWindow *w, int x, int y) {
     snakeLength = 4;
     for (int i = 0; i < 4; ++i) {
         if (i == 0)
-            body.push_front(getRectangleAt(sf::Vector2f(x, y), colorHead));
+            body.insert(body.begin(), getRectangleAt(sf::Vector2f(x, y), colorHead));
         else
             body.push_back(getRectangleAt(body[i - 1].getPosition(), colorBody));
     }
@@ -33,7 +33,7 @@ void Snake::moveSnake() {
                          body.front().getPosition().y
                              + (BOX_SIZE * currentMoveDirection.y));
     body.front().setFillColor(colorBody);
-    body.push_front(getRectangleAt(newHead, colorHead));
+    body.insert(body.begin(), getRectangleAt(newHead, colorHead));
     if (!updateLegth && (updateLegth = false))
         body.pop_back();
 }
@@ -49,6 +49,7 @@ void Snake::changeMoveDirection(sf::Vector2<int> direction) {
 
 std::vector<sf::RectangleShape>& Snake::getBody() {
     return body;
+}
 
 int Snake::getSnakeLength() {
     return snakeLength;

@@ -60,14 +60,12 @@ void Game::render() {
     player1->drawSnake();
     food->drawFood();
 
-
     if (CheckCollision(player1->getBody().front(), food->getFood())) {
         sf::Vector2f newLocation = food->getNewPosition(player1->getBody());
-
         food->changeLocation(newLocation);
     }
     int gameSpeed = 60 - player1->getSnakeLength();
-    this->window->setFramerateLimit(gameSpeed <= 10 ? 10 : gameSpeed);
+    this->window->setFramerateLimit(gameSpeed <= 10 ? 10 : gameSpeed)   ;
     this->window->display();
 }
 void Game::SetPlayerOne(Snake *snake) {
