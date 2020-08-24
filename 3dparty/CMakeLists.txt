@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.1)
 
 set(CMAKE_CXX_EXTENSIONS OFF)
+
+execute_process(
+        COMMAND ../install.sh
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
 set(SFML_INCLUDE_DIR "./sfml/include")
 set(SFML_LIBRARY_DIR "./sfml/build/lib")
 
