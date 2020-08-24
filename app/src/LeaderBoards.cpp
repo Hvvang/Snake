@@ -9,10 +9,13 @@ std::multimap<int, std::string, bool (*)(int, int)> LeaderBoard::GetLeaders() {
 
     while (std::getline(inp, line)) {
         if (line.size() != 0) {
-            unsigned long position = line.find(' ');
-            std::string score(line.begin() + position, line.end());
-            std::string name(line.begin(), line.begin() + position);
-            test.insert(std::make_pair(std::stoi(score), name));
+            try {
+                unsigned long position = line.find(' ');
+                std::string score(line.begin() + position, line.end());
+                std::string name(line.begin(), line.begin() + position);
+                test.insert(std::make_pair(std::stoi(score), name));
+            }
+            catch (...) {}
         }
     }
     return test;
@@ -23,7 +26,7 @@ LeaderBoard::LeaderBoard(sf::RenderWindow *window, int width, int height)
     std::multimap<int, std::string, bool(*)(int,int)> leaders = GetLeaders();
     int index = 2;
 
-    font.loadFromFile("ArialRegular.ttf");
+    font.loadFromFile("./resources/ArialRegular.ttf");
 
     menu[0].setCharacterSize(height / 20);
     menu[0].setFont(font);

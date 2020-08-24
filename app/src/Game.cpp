@@ -7,7 +7,7 @@ Game::Game(sf::RenderWindow *window, int width, int height) {
     this->food = new Food(this->GetRenderWindow());
     this->food->changeLocation(this->player1->getBody());
 
-    this->m_soundBuffer.loadFromFile("/Users/huanghe/Desktop/race00-C-SNAKE-/app/resources/back.wav");
+    this->m_soundBuffer.loadFromFile("./resources/back.wav");
     this->m_sound.setBuffer(this->m_soundBuffer);
     this->m_sound.play();
 }
@@ -18,7 +18,7 @@ Game::~Game() {
 }
 
 void Game::InitVariables(int width, int height) {
-    this->m_font.loadFromFile("ArialRegular.ttf");
+    this->m_font.loadFromFile("./resources/ArialRegular.ttf");
     this->endGame = false;
     this->m_score = 0;
 
@@ -47,8 +47,6 @@ void Game::PoolEvents() {
                     player1->changeMoveDirection(sf::Vector2<int>(-1, 0));
                 } else if (this->windowEvent.key.code == sf::Keyboard::Right) {
                     player1->changeMoveDirection(sf::Vector2<int>(1, 0));
-                } else if (this->windowEvent.key.code == sf::Keyboard::Space) {
-                    player1->enlarger();
                 }
                 break;
         }
@@ -80,8 +78,8 @@ void Game::render() {
     if (player1->checkDeathCollision() || player1->getSnakeLength() < 2) {
         this->endGame = true;
     }
-    int gameSpeed = 20 - player1->getSnakeLength();
-    this->window->setFramerateLimit(gameSpeed <= 10 ? 10 : gameSpeed)   ;
+    int gameSpeed = 24 - player1->getSnakeLength();
+    this->window->setFramerateLimit(gameSpeed <= 10 ? 10 : gameSpeed);
     this->window->display();
 }
 void Game::SetPlayerOne(Snake *snake) {

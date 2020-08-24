@@ -7,7 +7,7 @@ Menu::Menu(sf::RenderWindow *window,
            float width,
            float height) : m_width(width), m_height(height), m_window(window)
     {
-        if (!font.loadFromFile("ArialRegular.ttf"))
+        if (!font.loadFromFile("./resources/ArialRegular.ttf"))
         {
             std::cerr << "Erorr" << std::endl;
         }
